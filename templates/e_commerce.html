@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,500;1,100&display=swap"
+    rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Reenie+Beanie&display=swap" rel="stylesheet">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bexazon</title>
+    <link rel="stylesheet" href="{{url_for('static', path='e_commerce.css') }}">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+</head>
+
+<header>
+    <div class="container">
+        <div class="list_a">
+            <ul>
+                <li><a href="account">Your account</a></li>
+                <li><a href="register">Register</a></li>
+                <li><a href="wishlist">Wishlist</a></li>
+            </ul>
+        </div>
+
+        <div class="logo-container">
+            <div class="logo">
+                <img src="/static/photos/Bexazon-logo.jpg" alt="bexazon" height="100">
+            </div>
+        </div>
+
+
+        <div class="bag">
+            <ul>
+                <li>
+                    <a href="bag">Your bag
+                        <span>(0)</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+</header>
+
+<body>
+    <div class="navi">
+        <div class="container" id="navigation">
+            <nav>
+                <li><a href="fresh food">Fresh Food</a></li>
+                <li><a href="bakery">Bakery</a></li>
+                <li><a href="food cupboard">Food Cupboard</a></li>
+                <li><a href="frozen food">Frozen Food</a></li>
+                <li><a href="beer wine spirits">Beer, Wine and Spirits</a></li>
+                <li><a href="home cleaning">Home Cleaning</a></li>
+            </nav>
+        </div>
+
+        <div class="search">
+            <input class="find" type="text" placeholder="Search for anything">
+        </div>
+    </div>
+    
+    <div id="products">
+       
+    </div>
+
+    
+    <script>
+        // document.getElementById("demo").innerHTML = "Hello JavaScript!";
+        // console.log('hello world');
+        // const Http = new XMLHttpRequest();
+        // const url = 'http://127.0.0.1:8000/products';
+        // Http.open("GET", url);
+        // Http.send();
+
+        // Http.onreadystatechange = (e) => {
+        //     console.log(this.responseText)
+        //     if (this.responseText) {
+        //         const productData = JSON.parse(this.responseText);
+        //         console.log(productData)
+        //     }
+        // }
+
+        $(document).ready(function(){
+            fetch('http://127.0.0.1:8000/products')
+                .then(response => response.json())
+                .then(data => {
+                    data.forEach(product => {
+                        const formattedPrice = Number(product.price).toFixed(2); 
+                        const imageSource = product.url || `/static/photos/${product.name}.jpg`
+                        const newContent = 
+                        `<div class="card">
+                            <img src="${imageSource}" alt="${product.name}" style="width:100%">
+                            <h1 id="${product.name}">${product.name}</h1>
+                            <p class="price">£${formattedPrice}</p>
+                            <p>${product.description}</p>
+                            <p><button>Add to Basket</button></p>
+                        </div>`;
+                        
+
+                        $("#products").append(newContent);
+                    });
+                });
+        });
+
+        // $(document).ready(() => {
+
+        //     fetch('http://127.0.0.1:8000/products')
+        //         .then(response => response.json())
+        //         .then(data => {
+        //             console.log(data)
+
+        //             data.forEach(product => {
+        //                 const newContent = `<h1>${product.name}</h1>`;
+        //                 console.log(newContent);
+        //                 debugger;
+        //                 $("#container").click();​
+        //             });
+                    
+
+        //             document.getElementById("broccoli").innerHTML = data[2].name;
+        //             document.getElementById("banana").innerHTML = data[0].name;
+        //             document.getElementById("apple").innerHTML = data[1].name;
+        //         });
+        // });
+
+
+    </script>
+
+</body>
+
+</html>
