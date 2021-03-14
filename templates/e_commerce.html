@@ -18,7 +18,7 @@
 
 <header>
     <div class="container">
-        <div class="list_a">
+        <div class="navigation">
             <ul>
                 <li><a href="account">Your account</a></li>
                 <li><a href="register">Register</a></li>
@@ -67,23 +67,8 @@
     <div id="products">
        
     </div>
-
     
     <script>
-        // document.getElementById("demo").innerHTML = "Hello JavaScript!";
-        // console.log('hello world');
-        // const Http = new XMLHttpRequest();
-        // const url = 'http://127.0.0.1:8000/products';
-        // Http.open("GET", url);
-        // Http.send();
-
-        // Http.onreadystatechange = (e) => {
-        //     console.log(this.responseText)
-        //     if (this.responseText) {
-        //         const productData = JSON.parse(this.responseText);
-        //         console.log(productData)
-        //     }
-        // }
 
         $(document).ready(function(){
             fetch('http://127.0.0.1:8000/products')
@@ -106,28 +91,6 @@
                     });
                 });
         });
-
-        // $(document).ready(() => {
-
-        //     fetch('http://127.0.0.1:8000/products')
-        //         .then(response => response.json())
-        //         .then(data => {
-        //             console.log(data)
-
-        //             data.forEach(product => {
-        //                 const newContent = `<h1>${product.name}</h1>`;
-        //                 console.log(newContent);
-        //                 debugger;
-        //                 $("#container").click();​
-        //             });
-                    
-
-        //             document.getElementById("broccoli").innerHTML = data[2].name;
-        //             document.getElementById("banana").innerHTML = data[0].name;
-        //             document.getElementById("apple").innerHTML = data[1].name;
-        //         });
-        // });
-
 
     </script>
 
